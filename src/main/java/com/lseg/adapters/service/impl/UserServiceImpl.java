@@ -1,0 +1,27 @@
+package com.lseg.adapters.service.impl;
+
+import com.lseg.adapters.entity.User;
+import com.lseg.adapters.repo.UserDAO;
+import com.lseg.adapters.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+    @Autowired
+    private UserDAO userDAO;
+
+    @Override
+    public boolean saveUser(User user) {
+        return userDAO.saveUserInRedis(user);
+    }
+
+    @Override
+    public List<User> getAllUsersFromRedis() {
+       List<User> allUsers = userDAO.getAllUsers();
+        return allUsers;
+    }
+}
